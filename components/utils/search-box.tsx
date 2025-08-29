@@ -64,7 +64,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ defaultValue = "", cat = false })
 
           <div className="flex items-center relative">
             <input
-              placeholder="Search for shoes..."
+              placeholder="Search for products..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={handleKeyDown}

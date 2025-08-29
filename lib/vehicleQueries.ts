@@ -45,17 +45,15 @@ export async function getShoesPaginated(
 
 // Fetch a single product (shoe) by ID
 export const getShoeById = async (id: string): Promise<any | undefined> => {
-  const query = `*[_type == "product" && _id == $id] {
+  const query = `*[_type == "product" && _id == $id][0] {
     _id,
     name,
     category -> {
       name,
       slug
     },
-    material,
-    waterResistance,
-    movementType,
-    caseSize,
+    brand,
+    features,
     images[] {
       asset -> {
         url
@@ -64,21 +62,22 @@ export const getShoeById = async (id: string): Promise<any | undefined> => {
     price,
     offerPrice,
     description,
-    soldOut // Add soldOut field
+    soldOut
   }`;
 
   try {
     const product = await client.fetch(query, { id });
-    if (product.length === 0) {
+    if (!product) {
       console.warn(`No product found for ID: ${id}`);
       return undefined;
     }
-    return product[0];
+    return product;
   } catch (error) {
     console.error("Error fetching product by ID:", error);
     return undefined;
   }
 };
+
 
 // Search for products (shoes) by keyword
 export const searchShoes = async (keyword: string): Promise<any[] | undefined> => {

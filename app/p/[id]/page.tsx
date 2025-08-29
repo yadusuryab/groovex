@@ -1,3 +1,5 @@
+"use client";
+
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MessageCircle, PhoneCall } from "lucide-react";
@@ -9,7 +11,6 @@ import { site } from "@/lib/site-config";
 
 import { getShoeById } from "@/lib/vehicleQueries";
 import ProductCarousel from "@/components/product/product-carousel";
-
 import SHeading from "@/components/utils/section-heading";
 import AddToCartButton from "@/components/cart/cart-buttons/add-to-cart";
 
@@ -18,7 +19,7 @@ interface ProductProps {
 }
 
 export async function generateMetadata({ params }: ProductProps): Promise<Metadata> {
-  const resp = await params
+  const resp = await params;
   const product = await getShoeById(resp.id);
 
   if (!product) {
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: ProductProps): Promise<Metada
 }
 
 export default async function ProductPage({ params }: ProductProps) {
-  const resp = await params
+  const resp = await params;
   const product = await getShoeById(resp.id);
 
   if (!product) return notFound();
@@ -52,10 +53,8 @@ export default async function ProductPage({ params }: ProductProps) {
   const {
     name,
     category,
-    material,
-    waterResistance,
-    movementType,
-    caseSize,
+    brand,
+    features,
     images,
     description,
     price,
@@ -67,15 +66,12 @@ export default async function ProductPage({ params }: ProductProps) {
   const message = `Hi, I am interested in the ${name}.
   - Price: ₹${offerPrice ? offerPrice.toLocaleString() : price?.toLocaleString() || "N/A"}
   - Category: ${category?.name || "N/A"}
-  - Material: ${material || "N/A"}
-  - Water Resistance: ${waterResistance || "N/A"}
-  - Movement Type: ${movementType || "N/A"}
-  - Case Size: ${caseSize || "N/A"}
+  - Brand: ${brand || "N/A"}
   
   Check it out here: ${baseUrl}/p/${resp.id}`;
 
   return (
-    <div className="">
+    <div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Product Carousel */}
         <ProductCarousel images={images || []} productName={name || site.name} />
@@ -91,19 +87,20 @@ export default async function ProductPage({ params }: ProductProps) {
             </h2>
           </div>
 
+          {/* Brand + Category */}
           <div className="flex gap-4 items-center">
             {category?.name && (
               <Badge className="rounded-md">{category.name.toUpperCase()}</Badge>
             )}
-            {caseSize && (
-              <Badge className="rounded-md" variant={"secondary"}>
-                Case Size: {caseSize}
+            {brand && (
+              <Badge className="rounded-md" variant="secondary">
+                {brand}
               </Badge>
             )}
           </div>
 
           {/* Price Section */}
-          <div className="col-span-2">
+          <div>
             {offerPrice ? (
               <div className="flex items-center gap-4">
                 <p className="font-bold text-xl">
@@ -146,13 +143,13 @@ export default async function ProductPage({ params }: ProductProps) {
 
           <div className="grid grid-cols-2 gap-2">
             <Link href={`tel:${site.phone}`} target="_blank">
-              <Button className="w-full rounded" size={'sm'} variant={"secondary"}>
+              <Button className="w-full rounded" size="sm" variant="secondary">
                 <PhoneCall /> Enquire via Phone
               </Button>
             </Link>
 
             {soldOut ? (
-              <Button className="w-full rounded"size={'sm'}  disabled>
+              <Button className="w-full rounded" size="sm" disabled>
                 Sold Out
               </Button>
             ) : (
@@ -160,49 +157,22 @@ export default async function ProductPage({ params }: ProductProps) {
             )}
           </div>
 
-          {/* Additional Details */}
-          <div className="grid grid-cols-2 gap-4 text-sm">
-            <div className="col-span-2">
-              <SHeading
-                title="About This Product"
-                description={description}
-                nolink={true}
-              />
-            </div>
-            <div>
-              <p className="font-semibold text-muted-foreground">Material</p>
-              <p>{material || "N/A"}</p>
-            </div>
-            <div>
-              <p className="font-semibold text-muted-foreground">Water Resistance</p>
-              <p>{waterResistance || "N/A"}</p>
-            </div>
-            <div>
-              <p className="font-semibold text-muted-foreground">Movement Type</p>
-              <p>{movementType || "N/A"}</p>
-            </div>
-            <div>
-              <p className="font-semibold text-muted-foreground">Case Size</p>
-              <p>{caseSize || "N/A"}</p>
-            </div>
-            <div>
-              <p className="font-semibold text-muted-foreground">Price</p>
-              <p>
-                {offerPrice ? (
-                  <>
-                    ₹{new Intl.NumberFormat("en-IN").format(offerPrice)}{" "}
-                    {price && (
-                      <span className="text-muted-foreground line-through">
-                        ₹{new Intl.NumberFormat("en-IN").format(price)}
-                      </span>
-                    )}
-                  </>
-                ) : (
-                  price && `₹${new Intl.NumberFormat("en-IN").format(price)}`
-                )}
-              </p>
-            </div>
+          {/* About Section */}
+          <div className="col-span-2">
+            <SHeading title="About This Product" description={description} nolink={true} />
           </div>
+
+          {/* Features */}
+          {features && features.length > 0 && (
+            <div className="space-y-2">
+              <p className="font-semibold text-muted-foreground">Key Features</p>
+              <ul className="list-disc pl-5 space-y-1 text-sm">
+                {features.map((feat: string, idx: number) => (
+                  <li key={idx}>{feat}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
