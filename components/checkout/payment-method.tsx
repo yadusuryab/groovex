@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface PaymentMethodProps {
   paymentMethod: "online" | "cod";
@@ -19,27 +19,19 @@ export const PaymentMethod = ({
   <div className="space-y-4">
     {/* Payment Mode */}
     <div>
-      <p className="font-medium">Select Payment Mode:</p>
-      <div className="space-y-2 mt-2">
-        <Label className="flex items-center space-x-2">
-          <Input
-            type="radio"
-            value="online"
-            checked={paymentMethod === "online"}
-            onChange={() => handlePaymentChange("online")}
-          />
-          <span>Online Payment</span>
-        </Label>
-        <Label className="flex items-center space-x-2">
-          <Input
-            type="radio"
-            value="cod"
-            checked={paymentMethod === "cod"}
-            onChange={() => handlePaymentChange("cod")}
-          />
-          <span>Cash on Delivery</span>
-        </Label>
-      </div>
+      <Label className="font-medium">Select Payment Mode:</Label>
+      <Select
+        value={paymentMethod}
+        onValueChange={(val: "online" | "cod") => handlePaymentChange(val)}
+      >
+        <SelectTrigger className="w-full mt-2">
+          <SelectValue placeholder="Choose payment method" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="online">Online Payment</SelectItem>
+          <SelectItem value="cod">Cash on Delivery</SelectItem>
+        </SelectContent>
+      </Select>
     </div>
 
     {/* Terms */}

@@ -74,7 +74,7 @@ export const CustomerDetailsForm = ({
         <Input
           id="maincity"
           name="maincity"
-          placeholder="maincity"
+          placeholder="Main City"
           value={customerDetails.maincity}
           onChange={handleInputChange}
           required
@@ -85,7 +85,7 @@ export const CustomerDetailsForm = ({
         <Input
           id="landmark"
           name="landmark"
-          placeholder="landmark"
+          placeholder="Landmark"
           value={customerDetails.landmark}
           onChange={handleInputChange}
           required
