@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 interface CustomerDetailsFormProps {
   customerDetails: {
     name: string;
-    email: string;
     contact1: string;
     address: string;
     maincity:string;

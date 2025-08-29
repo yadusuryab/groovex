@@ -31,11 +31,10 @@ export interface CartItem {
   
   export const validateForm = (customerDetails: {
     name: string;
-    email: string;
     contact1: string;
     address: string;
   }, cartItems: CartItem[]) => {
-    if (!customerDetails.name || !customerDetails.email || !customerDetails.contact1 || !customerDetails.address) {
+    if (!customerDetails.name  || !customerDetails.contact1 || !customerDetails.address) {
       alert("Please fill all the required fields.");
       return false;
     }

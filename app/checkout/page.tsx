@@ -27,7 +27,6 @@ export default function CheckoutPage() {
   );
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
-    email: "",
     contact1: "",
     address: "",
     maincity: "",
