@@ -72,7 +72,7 @@ export default function CheckoutPage() {
       )
       .join("\n");
 
-    const message = `New Order Details:\n\n*Customer Details:*\n- Name: ${customerDetails.name}\n- Email: ${customerDetails.email}\n- Contact: ${customerDetails.contact1}\n- Address: ${customerDetails.address}, ${customerDetails.district}, ${customerDetails.state}, ${customerDetails.pincode}\n\n*Order Summary:*\n${productsDetails}\n\n*Payment Method:* ${paymentMethod}\n*Total Amount:* ₹${subtotal}`;
+    const message = `New Order Details:\n\n*Customer Details:*\n- Name: ${customerDetails.name}\n- Contact: ${customerDetails.contact1}\n- Address: ${customerDetails.address}, ${customerDetails.maincity},${customerDetails.landmark}, ${customerDetails.district}, ${customerDetails.state}, ${customerDetails.pincode}\n\n*Order Summary:*\n${productsDetails}\n\n*Payment Method:* ${paymentMethod}\n*Total Amount:* ₹${subtotal}`;
 
     // Encode the message for WhatsApp URL
     const encodedMessage = encodeURIComponent(message);
