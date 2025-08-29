@@ -8,6 +8,8 @@ interface CustomerDetailsFormProps {
     email: string;
     contact1: string;
     address: string;
+    maincity:string;
+    landmark:string;
     district: string;
     state: string;
     pincode: string;
@@ -35,6 +37,84 @@ export const CustomerDetailsForm = ({
         />
       </div>
       <div className="space-y-2">
+        <Label htmlFor="address">Address</Label>
+        <Textarea
+          id="address"
+          name="address"
+          placeholder="Enter your address"
+          value={customerDetails.address}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="state">State</Label>
+        <Input
+          id="state"
+          name="state"
+          placeholder="State"
+          value={customerDetails.state}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="district">District</Label>
+        <Input
+          id="district"
+          name="district"
+          placeholder="District"
+          value={customerDetails.district}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="maincity">Main City</Label>
+        <Input
+          id="maincity"
+          name="maincity"
+          placeholder="maincity"
+          value={customerDetails.maincity}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="landmark">Landmark</Label>
+        <Input
+          id="landmark"
+          name="landmark"
+          placeholder="landmark"
+          value={customerDetails.landmark}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="pincode">Pincode</Label>
+        <Input
+          id="pincode"
+          name="pincode"
+          placeholder="Pincode"
+          value={customerDetails.pincode}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="space-y-2">
+        <Label htmlFor="contact1">Contact Number</Label>
+        <Input
+          id="contact1"
+          name="contact1"
+          placeholder="Phone number"
+          value={customerDetails.contact1}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+
+      <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
@@ -46,61 +126,6 @@ export const CustomerDetailsForm = ({
           required
         />
       </div>
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="contact1">Contact Number</Label>
-      <Input
-        id="contact1"
-        name="contact1"
-        placeholder="Phone number"
-        value={customerDetails.contact1}
-        onChange={handleInputChange}
-        required
-      />
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="address">Address</Label>
-      <Textarea
-        id="address"
-        name="address"
-        placeholder="Enter your address"
-        value={customerDetails.address}
-        onChange={handleInputChange}
-        required
-      />
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="district">District</Label>
-      <Input
-        id="district"
-        name="district"
-        placeholder="District"
-        value={customerDetails.district}
-        onChange={handleInputChange}
-        required
-      />
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="state">State</Label>
-      <Input
-        id="state"
-        name="state"
-        placeholder="State"
-        value={customerDetails.state}
-        onChange={handleInputChange}
-        required
-      />
-    </div>
-    <div className="space-y-2">
-      <Label htmlFor="pincode">Pincode</Label>
-      <Input
-        id="pincode"
-        name="pincode"
-        placeholder="Pincode"
-        value={customerDetails.pincode}
-        onChange={handleInputChange}
-        required
-      />
     </div>
   </div>
 );
