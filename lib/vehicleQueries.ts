@@ -30,7 +30,8 @@ export async function getShoesPaginated(
     ? `*[_type == "product" && defined(category) && category->slug.current == $slug]`
     : `*[_type == "product"]`;
 
-  const query = `${base} | order(_createdAt desc) [${start}...${end}] {${fields}}`;
+  // 👇 soldOut == false first, then order by createdAt
+  const query = `${base} | order(soldOut asc, _createdAt desc) [${start}...${end}] {${fields}}`;
 
   try {
     const products = await client.fetch(query, { slug: categorySlug });
@@ -40,6 +41,7 @@ export async function getShoesPaginated(
     return [];
   }
 }
+
 
 
 

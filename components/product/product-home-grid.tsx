@@ -83,20 +83,9 @@ function ProductHomeGrid() {
   xl:grid-cols-5         /* 🖥️ wide screens: 5 */
   gap-6"
       >
-        {vehicles
-  .slice() // avoid mutating original
-  .sort((a, b) => {
-    // Assuming product has `stock` or `isSoldOut`
-    const aSoldOut = a.soldOut;
-    const bSoldOut = b.soldOut;
-
-    if (aSoldOut === bSoldOut) return 0; // keep order if both same
-    return aSoldOut ? 1 : -1; // sold-out goes to bottom
-  })
-  .map((p) => (
-    <ProductCard2 key={p._id} product={p} />
-  ))}
-
+        {vehicles.map((p) => (
+          <ProductCard2 key={p._id} product={p} />
+        ))}
       </div>
 
       {/* Loader for infinite scroll */}
